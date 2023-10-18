@@ -1,0 +1,19 @@
+DROP DATABASE IF EXISTS netflix;
+
+CREATE DATABASE netflix;
+
+USE netflix;
+
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    gebruikernaam VARCHAR(255) UNIQUE NOT NULL,
+    wachtwoord VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE film (
+    id INT(235) NOT NULL AUTO_INCREMENT ,
+    name VARCHAR(1000) NOT NULL ,
+    duur TIME NOT NULL ,
+    sumary VARCHAR(10000) NOT NULL ,
+     PRIMARY KEY (id)
+); 
