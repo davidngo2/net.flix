@@ -31,11 +31,6 @@
             </nav>
         </div>
     </header>
-    <main class="container mx-auto">
-        <h1 class="text-4xl font-bold mb-8">Welcome back, [username]!</h1>
-        <div class="grid grid-cols-2 gap-8">
-            
-        </div>
-    </main>
+    
 </body>
 </html>

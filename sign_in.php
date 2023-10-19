@@ -31,7 +31,7 @@
         <img src="logo.png" alt="Netflix Logo" class="w-32">
     </div>
 
-    <div class="container mx-auto p-6 mt-12 bg-black rounded-lg max-w-md">
+    <div class="container mx-auto p-6 mt-12 bg-black max-w-md">
         <h1 class="text-3xl font-semibold mb-6">Sign In</h1>
         <div class="mb-10">
             <form action="" method="post">
