@@ -7,18 +7,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
 </head>
         <?php
+        session_start();
         include_once('conn.php');
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username = $_POST['gebruikernaam'];
             $password = $_POST['wachtwoord'];
 
-            $sql = "SELECT * FROM user WHERE gebruikernaam='$username' AND wachtwoord='$password'";
+            $sql = "SELECT * FROM user WHERE id AND gebruikernaam='$username' AND wachtwoord='$password'";
             $result = $conn->query($sql);
 
             if ($result->num_rows == 1) {
+                $row = $result->fetch_assoc();
+                $user_id = $row['id'];
+                $_SESSION['user_id'] = $user_id;
                 header('Location: welcome.php');
-                exit; 
+                exit;
             } else {
                 echo "Inloggen mislukt.";
             }

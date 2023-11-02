@@ -1,7 +1,3 @@
-<?php
-include_once 'conn.php';
-$query = $conn->query("SELECT * FROM filmS");
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,29 +34,12 @@ $query = $conn->query("SELECT * FROM filmS");
         </div>
     </header>
 
-<div class="container px-4 mx-auto py-8">
-    <h1 class="text-4xl font-semibold mb-8">Filmoverzicht</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <?php
-        while ($data = $query->fetch_assoc()) {
-            $name = $data['name'];
-            $foto = $data['foto'];
-            $id = $data['id'];
-            ?>
-            <a href="info.php?id=<?php echo $id; ?>">
-                <div class="bg-black text-white rounded-lg shadow-lg">
-                    <img src="<?php echo $foto ?>" alt="<?php echo $name; ?>" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h2 class="text-2xl mb-2"><?php echo $name; ?></h2>
-                    </div>
-                </div>
-            </a>
-            <?php
-        }
-        ?>
+    <div class="container px-4 mx-auto py-8">
+        <h1 class="text-4xl font-semibold mb-8">Filmoverzicht</h1>
+        <div class="flex space-x-4 grid xl:grid-cols-4 " id="film-grid">
+            <!-- Film items will be added here -->
+        </div>
     </div>
-</div>
-
+    <script src="script.js"></script>
 </body>
-
 </html>

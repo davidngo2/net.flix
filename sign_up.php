@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aanmelden</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
 </head>
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = $_POST['gebruikernaam'];
-            $password = $_POST['wachtwoord'];
-
-
-            $sql = "INSERT INTO user (gebruikernaam, wachtwoord) VALUES ('$username', '$password')";
-
-           
-            include_once('conn.php');
-            
-            if ($conn->query($sql) === true) {
-                echo '<script>console.log("Registratie succesvol!");</script>';
-            } else {
-                echo '<script>console.error("Fout bij registratie: ' . $conn->error . '");</script>';
-            }
-            $conn->close();
-        }
-        ?>
+<?php
+session_start();
+include_once('conn.php');
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $username = $_POST['gebruikernaam'];
+    $password = $_POST['wachtwoord'];
+    $sql = "INSERT INTO user (email, gebruikernaam, wachtwoord) VALUES ('$email', '$username', '$password')";
+    if ($conn->query($sql) === true) {
+        $newUserId = $conn->insert_id;
+        $_SESSION['user_id'] = $newUserId;
+        header("Location: welcome.php");
+        exit;
+    } else {
+        echo '<script>console.error("Fout bij registratie: ' . $conn->error . '");</script>';
+    }
+}
+$conn->close();
+?>
 <body class="bg-blend-darken text-white font-sans" style="background-image: url('netflix.jpg');">
     <div class="logo p-4">
         <img src="logo.png" alt="Netflix Logo" class="w-32">
@@ -34,7 +33,8 @@
     <div class="container mx-auto p-6 mt-12 bg-black max-w-md">
         <h1 class="text-3xl font-semibold mb-6">Sign up</h1>
         <div class="mb-10">
-            <form action="welcome.php" method="post">
+            <form action="" method="post">
+            <input type="Email" placeholder="Email" name="email" class="bg-gray-600 mb-3 w-full px-4 py-3 rounded bg-[#333] text-white placeholder-gray-500 text-base">
             <input type="text" placeholder="Username" name="gebruikernaam" class="bg-gray-600 mb-3 w-full px-4 py-3 rounded bg-[#333] text-white placeholder-gray-500 text-base">
             <input type="password" placeholder="Password" name="wachtwoord" class="bg-gray-600 mb-10 w-full px-4 py-3 rounded bg-[#333] text-white placeholder-gray-500 text-base">
             <button type="submit" class="mb-2 w-full px-4 py-3 rounded bg-red-600 text-white text-base hover:bg-red-dark focus:outline-none focus:ring-2 focus:ring-red">Sign up</button>
@@ -50,5 +50,4 @@
         </div>
     </div>
 </body>
-
 </html>
