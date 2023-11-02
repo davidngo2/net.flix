@@ -1,7 +1,3 @@
-<?php
-include_once 'conn.php';
-$query = $conn->query("SELECT * FROM filmS");
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +6,19 @@ $query = $conn->query("SELECT * FROM filmS");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
+    <style>
+        .film-slide {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        .film-item {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            width: 25%;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-900 text-white">
@@ -38,29 +47,26 @@ $query = $conn->query("SELECT * FROM filmS");
         </div>
     </header>
 
-<div class="container px-4 mx-auto py-8">
-    <h1 class="text-4xl font-semibold mb-8">Filmoverzicht</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <?php
-        while ($data = $query->fetch_assoc()) {
-            $name = $data['name'];
-            $foto = $data['foto'];
-            $id = $data['id'];
-            ?>
-            <a href="info.php?id=<?php echo $id; ?>">
-                <div class="bg-black text-white rounded-lg shadow-lg">
-                    <img src="<?php echo $foto ?>" alt="<?php echo $name; ?>" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h2 class="text-2xl mb-2"><?php echo $name; ?></h2>
-                    </div>
-                </div>
-            </a>
-            <?php
-        }
-        ?>
+    <div class="container px-4 mx-auto py-8">
+        <h1 class="text-4xl font-semibold mb-8">Filmoverzicht</h1>
+        <div class="film-slide" id="film-grid">
+        </div>
     </div>
-</div>
-
+    <div class="container px-4 mx-auto py-8">
+        <h1 class="text-4xl font-semibold mb-8">Upcoming</h1>
+        <div class="film-slide" id="film-grid1">
+        </div>
+    </div>
+    <div class="container px-4 mx-auto py-8">
+        <h1 class="text-4xl font-semibold mb-8">Top rated</h1>
+        <div class="film-slide" id="film-grid2">
+        </div>
+    </div>
+    <div class="container px-4 mx-auto py-8">
+        <h1 class="text-4xl font-semibold mb-8">Trending series</h1>
+        <div class="film-slide" id="film-grid3">
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
-
 </html>

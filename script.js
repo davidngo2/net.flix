@@ -3,35 +3,36 @@ const options = {
     headers: {
         accept: "application/json",
         Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTAwZmRmNjdkN2ZiMDQzNTg1NjZmMWQ4N2M1YTYwZCIsInN1YiI6IjY1NDIxM2QzNmJlYWVhMDEwYjMwZDIzZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.E-T3vW7P93giUp0OANXrZ0uXa7mfRkcsnJP25d0m8jE",
+            "Bearer ",
     },
 };
 
-const apiUrl = "https://api.themoviedb.org/3/trending/all/week?language=en-US";
+const apiUrl = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
 
 fetch(apiUrl, options)
     .then((response) => response.json())
     .then((data) => {
-        const filmGrid = document.getElementById("film-grid");
+        const filmSlide = document.getElementById("film-grid");
 
         data.results.forEach((film) => {
-            const filmItem = document.createElement("a");
-            filmItem.href = "info.php";
+            const filmItem = document.createElement("div");
+            filmItem.classList.add("film-item");
 
             const filmCard = document.createElement("div");
             filmCard.classList.add(
                 "bg-black",
                 "text-white",
                 "rounded-lg",
+                "object-cover",
                 "shadow-lg"
             );
-
+            
             const filmImage = document.createElement("img");
             filmImage.src = `https://image.tmdb.org/t/p/w500/${film.poster_path}`;
             filmImage.alt = film.title;
             filmImage.classList.add(
                 "w-full",
-                "h-64",
+                "h-full",
                 "object-cover",
                 "rounded-t-lg"
             );
@@ -40,25 +41,151 @@ fetch(apiUrl, options)
             filmTitle.textContent = film.title;
             filmTitle.classList.add("text-2xl", "mb-2");
 
-            const filmOverview = document.createElement("p");
-            filmOverview.textContent = film.overview;
-            filmOverview.classList.add("text-sm", "mb-4");
-
-            const filmReleaseDate = document.createElement("p");
-            filmReleaseDate.textContent = "Release Date: " + film.release_date;
-            filmReleaseDate.classList.add("text-sm", "mb-2");
-
-            const filmRating = document.createElement("p");
-            filmRating.textContent = "Rating: " + film.vote_average;
-            filmRating.classList.add("text-sm");
-
             filmCard.appendChild(filmImage);
             filmCard.appendChild(filmTitle);
-            filmCard.appendChild(filmOverview);
-            filmCard.appendChild(filmReleaseDate);
-            filmCard.appendChild(filmRating);
             filmItem.appendChild(filmCard);
-            filmGrid.appendChild(filmItem);
+            filmSlide.appendChild(filmItem);
         });
     })
     .catch((err) => console.error(err));
+
+
+function fetchUpcomingFilms() {
+    const upcomingApiUrl = "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
+
+    fetch(upcomingApiUrl, options)
+        .then((response) => response.json())
+        .then((data) => {
+            const filmSlide = document.getElementById("film-grid1");
+
+            data.results.forEach((film) => {
+                const filmItem = document.createElement("div");
+                filmItem.classList.add("film-item");
+
+                const filmCard = document.createElement("div");
+                filmCard.classList.add(
+                    "bg-black",
+                    "text-white",
+                    "rounded-lg",
+                    "object-cover",
+                    "shadow-lg"
+                );
+
+                const filmImage = document.createElement("img");
+                filmImage.src = `https://image.tmdb.org/t/p/w500/${film.poster_path}`;
+                filmImage.alt = film.title;
+                filmImage.classList.add(
+                    "w-full",
+                    "h-full",
+                    "object-cover",
+                    "rounded-t-lg"
+                );
+
+                const filmTitle = document.createElement("h2");
+                filmTitle.textContent = film.title;
+                filmTitle.classList.add("text-2xl", "mb-2");
+
+                filmCard.appendChild(filmImage);
+                filmCard.appendChild(filmTitle);
+                filmItem.appendChild(filmCard);
+                filmSlide.appendChild(filmItem);
+            });
+        })
+        .catch((err) => console.error(err));
+}
+
+fetchUpcomingFilms();
+
+
+function fetchTopRatedMovies() {
+    const topRatedApiUrl = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
+
+    fetch(topRatedApiUrl, options)
+        .then((response) => response.json())
+        .then((data) => {
+            const filmSlide = document.getElementById("film-grid2");
+
+            data.results.forEach((film) => {
+                const filmItem = document.createElement("div");
+                filmItem.classList.add("film-item");
+
+                const filmCard = document.createElement("div");
+                filmCard.classList.add(
+                    "bg-black",
+                    "text-white",
+                    "rounded-lg",
+                    "object-cover",
+                    "shadow-lg"
+                );
+
+                const filmImage = document.createElement("img");
+                filmImage.src = `https://image.tmdb.org/t/p/w500/${film.poster_path}`;
+                filmImage.alt = film.title;
+                filmImage.classList.add(
+                    "w-full",
+                    "h-full",
+                    "object-cover",
+                    "rounded-t-lg"
+                );
+
+                const filmTitle = document.createElement("h2");
+                filmTitle.textContent = film.title;
+                filmTitle.classList.add("text-2xl", "mb-2");
+
+                filmCard.appendChild(filmImage);
+                filmCard.appendChild(filmTitle);
+                filmItem.appendChild(filmCard);
+                filmSlide.appendChild(filmItem);
+            });
+        })
+        .catch((err) => console.error(err));
+}
+
+fetchTopRatedMovies();
+
+
+function fetchTrendingTVShows() {
+    const trendingTVApiUrl = "https://api.themoviedb.org/3/trending/tv/day?language=en-US";
+
+    fetch(trendingTVApiUrl, options)
+        .then((response) => response.json())
+        .then((data) => {
+            const filmSlide = document.getElementById("film-grid3");
+
+            data.results.forEach((show) => {
+                const filmItem = document.createElement("div");
+                filmItem.classList.add("film-item");
+
+                const filmCard = document.createElement("div");
+                filmCard.classList.add(
+                    "bg-black",
+                    "text-white",
+                    "rounded-lg",
+                    "object-cover",
+                    "shadow-lg"
+                );
+
+                const filmImage = document.createElement("img");
+                filmImage.src = `https://image.tmdb.org/t/p/w500/${show.poster_path}`;
+                filmImage.alt = show.name;
+                filmImage.classList.add(
+                    "w-full",
+                    "h-full",
+                    "object-cover",
+                    "rounded-t-lg"
+                );
+
+                const filmTitle = document.createElement("h2");
+                filmTitle.textContent = show.name;
+                filmTitle.classList.add("text-2xl", "mb-2");
+
+                filmCard.appendChild(filmImage);
+                filmCard.appendChild(filmTitle);
+                filmItem.appendChild(filmCard);
+                filmSlide.appendChild(filmItem);
+            });
+        })
+        .catch((err) => console.error(err));
+}
+
+fetchTrendingTVShows();

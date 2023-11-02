@@ -40,16 +40,3 @@ while ($data = $query->fetch_assoc()) {
 
     </body>
     </html>
-.then(response => response.json())
-.then(data => {
-    const list = data.d;
-    list.map(item => {
-        const name = item.l;
-        const poster = item.i.imageUrl;
-        const movie = `<li><img src="${poster}">${name}</li>`;
-        document.querySelector(".movies").innerHTML += movie;    
-    })
-})
-.catch (err => {
-    console.error(err);
-});
