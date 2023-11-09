@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="test.css">
+</head>
+<body>
+    <div class="planGrid planGrid--has3Plans" data-uia="plan-grid">
+        <div class="planGrid__header">
+            <div class="planGrid__selector planGrid__planSelector" role="radiogroup" aria-label="Plan"
+                aria-describedby="planGrid_planChoice_description" data-uia="plan-grid-plan-selector"><span
+                    class="planGrid__selectorDescription" id="planGrid_planChoice_description"
+                    data-uia="plan-grid-plan-selector+description" aria-hidden="true">Select the plan you'd
+                    like</span><label class="planGrid__selectorChoice planGrid__planChoice" for="planGrid_planChoice_0"
+                    data-uia="plan-grid-plan-selector+label-text_1_stream_name"><input type="radio" name="planChoice"
+                        class="planGrid__selectorInput planGrid__planInput" value="314001031" id="planGrid_planChoice_0"
+                        data-uia="plan-grid-plan-selector+input-text_1_stream_name"><span
+                        class="planGrid__selectorLabel planGrid__planLabel">Basic</span></label><label
+                    class="planGrid__selectorChoice planGrid__planChoice" for="planGrid_planChoice_1"
+                    data-uia="plan-grid-plan-selector+label-text_2_stream_name"><input type="radio" name="planChoice"
+                        class="planGrid__selectorInput planGrid__planInput" value="10322" id="planGrid_planChoice_1"
+                        data-uia="plan-grid-plan-selector+input-text_2_stream_name"><span
+                        class="planGrid__selectorLabel planGrid__planLabel">Standard</span></label><label
+                    class="planGrid__selectorChoice planGrid__planChoice" for="planGrid_planChoice_2"
+                    data-uia="plan-grid-plan-selector+label-text_4_stream_name"><input type="radio" name="planChoice"
+                        class="planGrid__selectorInput planGrid__planInput" value="10341" id="planGrid_planChoice_2"
+                        checked="" data-uia="plan-grid-plan-selector+input-text_4_stream_name"><span
+                        class="planGrid__selectorLabel planGrid__planLabel">Premium</span></label></div>
+        </div>
+        <table class="planGrid__featureTable" role="table" data-uia="plan-grid-feature-table">
+            <caption class="planGrid__featureTableCaption">Netflix Plan Features</caption>
+            <tbody class="planGrid__featureTableBody" data-uia="plan-grid-feature-table-body">
+                <tr role="row" class="planGrid__featureTableRow--a11yheader">
+                    <td data-uia="plan-grid-cell-empty"></td>
+                    <th scope="col" data-uia="plan-grid-feature-table-cell-Basic">Basic</th>
+                    <th scope="col" data-uia="plan-grid-feature-table-cell-Standard">Standard</th>
+                    <th scope="col" data-uia="plan-grid-feature-table-cell-Premium">Premium</th>
+                </tr>
+                <tr role="row" class="planGrid__featureTableRow planGrid__featureTableRow--planPrice">
+                    <th class="planGrid__cell planGrid__featureCell"
+                        data-uia="plan-grid-feature-table-cell+planPrice-feature" scope="row">Monthly price</th>
+                    <td class="planGrid__cell planGrid__stringCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+planPrice-text_1_stream_name">€7.99</td>
+                    <td class="planGrid__cell planGrid__stringCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+planPrice-text_2_stream_name">€11.99</td>
+                    <td class="planGrid__cell planGrid__cell--isSelected planGrid__stringCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+planPrice-text_4_stream_name">€15.99</td>
+                </tr>
+                <tr role="row" class="planGrid__featureTableRow planGrid__featureTableRow--videoQuality">
+                    <th class="planGrid__cell planGrid__featureCell"
+                        data-uia="plan-grid-feature-table-cell+videoQuality-feature" scope="row">Video quality</th>
+                    <td class="planGrid__cell planGrid__videoQualityCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+videoQuality-text_1_stream_name">
+                        <div class="planGrid__videoQualityLabel">Good</div>
+                    </td>
+                    <td class="planGrid__cell planGrid__videoQualityCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+videoQuality-text_2_stream_name">
+                        <div class="planGrid__videoQualityLabel">Better</div>
+                    </td>
+                    <td class="planGrid__cell planGrid__cell--isSelected planGrid__videoQualityCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+videoQuality-text_4_stream_name">
+                        <div class="planGrid__videoQualityLabel">Best</div>
+                    </td>
+                </tr>
+                <tr role="row" class="planGrid__featureTableRow planGrid__featureTableRow--resolution">
+                    <th class="planGrid__cell planGrid__featureCell"
+                        data-uia="plan-grid-feature-table-cell+resolution-feature" scope="row">Resolution</th>
+                    <td class="planGrid__cell planGrid__videoQualityCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+resolution-text_1_stream_name">
+                        <div class="planGrid__videoQualityLabel">720p</div>
+                    </td>
+                    <td class="planGrid__cell planGrid__videoQualityCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+resolution-text_2_stream_name">
+                        <div class="planGrid__videoQualityLabel">1080p</div>
+                    </td>
+                    <td class="planGrid__cell planGrid__cell--isSelected planGrid__videoQualityCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+resolution-text_4_stream_name">
+                        <div class="planGrid__videoQualityLabel">4K+HDR</div>
+                    </td>
+                </tr>
+                <tr role="row" class="planGrid__featureTableRow planGrid__featureTableRow--noField">
+                    <th class="planGrid__cell planGrid__featureCell" data-uia="plan-grid-feature-table-cell+3-feature"
+                        scope="row">Watch on your TV, computer, mobile phone and tablet</th>
+                    <td class="planGrid__cell planGrid__booleanCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+3-text_1_stream_name"><span
+                            class="planGrid__booleanLabel">Yes</span><span class="planGrid__booleanIcon"
+                            aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="planGrid__booleanGraphic planGrid__booleanGraphic--isCheck default-ltr-cache-4z3qvp e1svuwfo1"
+                                data-name="Checkmark" aria-hidden="true" focusable="false">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M21.2928 4.29285L22.7071 5.70706L8.70706 19.7071C8.51952 19.8946 8.26517 20 7.99995 20C7.73474 20 7.48038 19.8946 7.29285 19.7071L0.292847 12.7071L1.70706 11.2928L7.99995 17.5857L21.2928 4.29285Z"
+                                    fill="currentColor"></path>
+                            </svg></span></td>
+                    <td class="planGrid__cell planGrid__booleanCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+3-text_2_stream_name"><span
+                            class="planGrid__booleanLabel">Yes</span><span class="planGrid__booleanIcon"
+                            aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="planGrid__booleanGraphic planGrid__booleanGraphic--isCheck default-ltr-cache-4z3qvp e1svuwfo1"
+                                data-name="Checkmark" aria-hidden="true" focusable="false">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M21.2928 4.29285L22.7071 5.70706L8.70706 19.7071C8.51952 19.8946 8.26517 20 7.99995 20C7.73474 20 7.48038 19.8946 7.29285 19.7071L0.292847 12.7071L1.70706 11.2928L7.99995 17.5857L21.2928 4.29285Z"
+                                    fill="currentColor"></path>
+                            </svg></span></td>
+                    <td class="planGrid__cell planGrid__cell--isSelected planGrid__booleanCell" role="cell"
+                        data-uia="plan-grid-feature-table-cell+3-text_4_stream_name"><span
+                            class="planGrid__booleanLabel">Yes</span><span class="planGrid__booleanIcon"
+                            aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="planGrid__booleanGraphic planGrid__booleanGraphic--isCheck default-ltr-cache-4z3qvp e1svuwfo1"
+                                data-name="Checkmark" aria-hidden="true" focusable="false">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M21.2928 4.29285L22.7071 5.70706L8.70706 19.7071C8.51952 19.8946 8.26517 20 7.99995 20C7.73474 20 7.48038 19.8946 7.29285 19.7071L0.292847 12.7071L1.70706 11.2928L7.99995 17.5857L21.2928 4.29285Z"
+                                    fill="currentColor"></path>
+                            </svg></span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div><small class="planGrid__disclaimer planGrid__standardDisclaimer"><span id="" data-uia="plan-grid-legal">HD
+                    (720p), Full HD (1080p), Ultra HD (4K) and HDR availability subject to your internet service and device
+                    capabilities. Not all content is available in all resolutions. See our <a
+                        href="https://help.netflix.com/legal/termsofuse" target="_blank">Terms of Use</a> for more
+                    details.</span></small><small class="planGrid__disclaimer planGrid__standardDisclaimer"><span id=""
+                    data-uia="plan-grid-legal">Only people who live with you may use your account. Watch on 4 different
+                    devices at the same time with Premium, 2 with Standard and 1 with Basic.</span></small></div>
+    </div>
+</body>
+</html>

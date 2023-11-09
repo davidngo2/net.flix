@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        #film-details {
+            text-align: left;
+        }
+
+        #film-details img {
+            max-width: 100%;
+            max-height: 100vh;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #film-info {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container px-4 mx-auto py-8">
+        <div id="film-details">
+            <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="${data.title}">
+            <div id="film-info">
+                <h2>${data.title}</h2>
+                <p>${data.overview}</p>
+                <p>Release Date: ${releaseDate}</p>
+                <p>Genres: ${genres}</p>
+                <p>Popularity: ${popularity}</p>
+            </div>
+        </div>
+    </div>
+    <script src="info.js"></script>
+</body>
+
+</html>

@@ -3,7 +3,7 @@ const options = {
     headers: {
         accept: "application/json",
         Authorization:
-            "Bearer ",
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTAwZmRmNjdkN2ZiMDQzNTg1NjZmMWQ4N2M1YTYwZCIsInN1YiI6IjY1NDIxM2QzNmJlYWVhMDEwYjMwZDIzZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.E-T3vW7P93giUp0OANXrZ0uXa7mfRkcsnJP25d0m8jE",
     },
 };
 
@@ -19,6 +19,9 @@ fetch(apiUrl, options)
             filmItem.classList.add("film-item");
 
             const filmCard = document.createElement("div");
+            filmCard.classList.add("film-card");
+            filmCard.dataset.filmId = film.id;
+
             filmCard.classList.add(
                 "bg-black",
                 "text-white",
@@ -26,6 +29,7 @@ fetch(apiUrl, options)
                 "object-cover",
                 "shadow-lg"
             );
+
             
             const filmImage = document.createElement("img");
             filmImage.src = `https://image.tmdb.org/t/p/w500/${film.poster_path}`;
@@ -36,6 +40,16 @@ fetch(apiUrl, options)
                 "object-cover",
                 "rounded-t-lg"
             );
+
+            filmSlide.addEventListener("click", function (event) {
+                const filmCard = event.target.closest(".film-card");
+                if (filmCard) {
+                    const filmId = filmCard.dataset.filmId;
+                    const infoPageUrl = `info.html?id=${filmId}`;
+                    window.location.href = infoPageUrl;
+                }
+            });
+
 
             const filmTitle = document.createElement("h2");
             filmTitle.textContent = film.title;
@@ -63,6 +77,9 @@ function fetchUpcomingFilms() {
                 filmItem.classList.add("film-item");
 
                 const filmCard = document.createElement("div");
+                filmCard.classList.add("film-card");
+                filmCard.dataset.filmId = film.id;
+                
                 filmCard.classList.add(
                     "bg-black",
                     "text-white",
@@ -80,6 +97,16 @@ function fetchUpcomingFilms() {
                     "object-cover",
                     "rounded-t-lg"
                 );
+                
+                filmSlide.addEventListener("click", function (event) {
+                    const filmCard = event.target.closest(".film-card");
+                    if (filmCard) {
+                        const filmId = filmCard.dataset.filmId;
+                        const infoPageUrl = `info.html?id=${filmId}`;
+                        window.location.href = infoPageUrl;
+                    }
+                });
+
 
                 const filmTitle = document.createElement("h2");
                 filmTitle.textContent = film.title;
@@ -110,6 +137,9 @@ function fetchTopRatedMovies() {
                 filmItem.classList.add("film-item");
 
                 const filmCard = document.createElement("div");
+                filmCard.classList.add("film-card");
+                filmCard.dataset.filmId = film.id;
+                
                 filmCard.classList.add(
                     "bg-black",
                     "text-white",
@@ -127,7 +157,17 @@ function fetchTopRatedMovies() {
                     "object-cover",
                     "rounded-t-lg"
                 );
+                
+                filmSlide.addEventListener("click", function (event) {
+                    const filmCard = event.target.closest(".film-card");
+                    if (filmCard) {
+                        const filmId = filmCard.dataset.filmId;
+                        const infoPageUrl = `info.html?id=${filmId}`;
+                        window.location.href = infoPageUrl;
+                    }
+                });
 
+                
                 const filmTitle = document.createElement("h2");
                 filmTitle.textContent = film.title;
                 filmTitle.classList.add("text-2xl", "mb-2");
@@ -157,6 +197,10 @@ function fetchTrendingTVShows() {
                 filmItem.classList.add("film-item");
 
                 const filmCard = document.createElement("div");
+                filmCard.classList.add("film-card");
+                filmCard.dataset.filmId = show.id;
+                
+
                 filmCard.classList.add(
                     "bg-black",
                     "text-white",
@@ -174,6 +218,16 @@ function fetchTrendingTVShows() {
                     "object-cover",
                     "rounded-t-lg"
                 );
+                
+                filmSlide.addEventListener("click", function (event) {
+                    const filmCard = event.target.closest(".film-card");
+                    if (filmCard) {
+                        const filmId = filmCard.dataset.filmId;
+                        const infoPageUrl = `infoserie.html?id=${filmId}`;
+                        window.location.href = infoPageUrl;
+                    }
+                });
+
 
                 const filmTitle = document.createElement("h2");
                 filmTitle.textContent = show.name;
@@ -189,3 +243,18 @@ function fetchTrendingTVShows() {
 }
 
 fetchTrendingTVShows();
+
+  function toggleDropdown() {
+      var dropdownContent = document.getElementById("profileDropdown");
+      if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+      } else {
+          dropdownContent.style.display = "block";
+      }
+      
+      document.addEventListener("click", function (e) {
+          if (!e.target.closest("#profileButton")) {
+              dropdownContent.style.display = "none";
+          }
+      });
+  }

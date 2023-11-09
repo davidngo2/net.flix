@@ -3,51 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aanmelden</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
+    <title>Document</title>
 </head>
-<?php
-session_start();
-include_once('conn.php');
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $username = $_POST['gebruikernaam'];
-    $password = $_POST['wachtwoord'];
-    $sql = "INSERT INTO user (email, gebruikernaam, wachtwoord) VALUES ('$email', '$username', '$password')";
-    if ($conn->query($sql) === true) {
-        $newUserId = $conn->insert_id;
-        $_SESSION['user_id'] = $newUserId;
-        header("Location: welcome.php");
-        exit;
-    } else {
-        echo '<script>console.error("Fout bij registratie: ' . $conn->error . '");</script>';
-    }
-}
-$conn->close();
-?>
-<body class="bg-blend-darken text-white font-sans" style="background-image: url('netflix.jpg');">
-    <div class="logo p-4">
-        <img src="logo.png" alt="Netflix Logo" class="w-32">
+<body class="bg-blend-darken text-white font-sans">
+    <div class="logo flex justify-between items-center" style="border-bottom: 1px solid gray; margin-bottom: 20px;">
+        <img src="logo.png" alt="Netflix Logo" class="w-44">
+        <a href="sign_in.php" class="ml-auto text-black font-semibold text-lg px-6">Sign In</a>
     </div>
-
-    <div class="container mx-auto p-6 mt-12 bg-black max-w-md">
-        <h1 class="text-3xl font-semibold mb-6">Sign up</h1>
-        <div class="mb-10">
-            <form action="" method="post">
-            <input type="Email" placeholder="Email" name="email" class="bg-gray-600 mb-3 w-full px-4 py-3 rounded bg-[#333] text-white placeholder-gray-500 text-base">
-            <input type="text" placeholder="Username" name="gebruikernaam" class="bg-gray-600 mb-3 w-full px-4 py-3 rounded bg-[#333] text-white placeholder-gray-500 text-base">
-            <input type="password" placeholder="Password" name="wachtwoord" class="bg-gray-600 mb-10 w-full px-4 py-3 rounded bg-[#333] text-white placeholder-gray-500 text-base">
-            <button type="submit" class="mb-2 w-full px-4 py-3 rounded bg-red-600 text-white text-base hover:bg-red-dark focus:outline-none focus:ring-2 focus:ring-red">Sign up</button>
-            <div class="flex items-center space-x-2">
-                <input type="checkbox" class="w-5 h-5 rounded bg-gray-500">
-                <label class="text-base text-gray-400">Remember me</label>
-                <a href="#" class="text-sm text-gray-400 no-underline hover:underline block">Need help?</a>
-            </div>
-            </form>
-        </div>
-        <div class="content mt-6 text-sm text-gray-400">
-            <h2 class="mb-3 mt-20">Alrady a nember? <a href="sign_in.php" class="text-white no-underline hover:underline">Sign in.</a></h2>
-        </div>
+    <div class="text-center text-black">
+        <img src="red-check-mark-circular-tick-16217.png" alt="Checkmark" class="w-10 mx-auto mb-2">
+        <p class="text-xs">STEP 1 OF 3</p>
+        <p class="text-4xl font-semibold mb-4">Choose your plan.</p>
+    </div>
+    <div class="max-w-xs mx-auto text-black">
+            <p class="mb-4 text-2xl"><span style="color: red; font-size: 40px;">&#10003;</span> No commitments, cancel at any time.</p>
+            <p class="mb-4 text-2xl"><span style="color: red; font-size: 40px;">&#10003;</span> Everything on Netflix for one low price.</p>
+            <p class="mb-14 text-2xl"><span style="color: red; font-size: 40px;">&#10003;</span> Unlimited viewing on all your devices.</p>
+            <a href="sign_up2.php" class="bg-red-500 text-white px-36 py-5 mt-4 rounded text-2xl">Next</a>
     </div>
 </body>
-</html>
