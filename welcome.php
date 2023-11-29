@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css">
-    <link rel="stylesheet" href="style.css">
 </head>
 <?php
 include_once 'conn.php';
@@ -15,7 +14,7 @@ if (isset($_SESSION['user_id'])) {
 }
     $movieId = $user_id;
     $query = $conn->query("SELECT * FROM user WHERE id = " . $user_id);
-while ($data = $query->fetch_assoc()) {
+while ($data = $query->fetch()) {
     $name = $data['gebruikernaam'];
 }
 ?>

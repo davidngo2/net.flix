@@ -14,11 +14,15 @@
             $username = $_POST['gebruikernaam'];
             $password = $_POST['wachtwoord'];
 
-            $sql = "SELECT * FROM user WHERE id AND gebruikernaam='$username' AND wachtwoord='$password'";
-            $result = $conn->query($sql);
+            $sql = "SELECT * FROM user WHERE gebruikernaam=:username AND wachtwoord=:password";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $password);
+            $stmt->execute();
 
-            if ($result->num_rows == 1) {
-                $row = $result->fetch_assoc();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($row) {
                 $user_id = $row['id'];
                 $_SESSION['user_id'] = $user_id;
                 header('Location: welcome.php');
@@ -28,7 +32,7 @@
             }
         }
 
-        $conn->close();
+        $conn = null;
         ?>
 <body class="bg-blend-darken text-white font-sans" style="background-image: url('netflix.jpg');">
     <div class="logo p-4">

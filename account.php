@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }
     $query = $conn->query("SELECT * FROM user WHERE id = " . $user_id);
-while ($data = $query->fetch_assoc()) {
+while ($data = $query->fetch()) {
     $name = $data['gebruikernaam'];
     $password = $data['wachtwoord'];
     $email = $data['email'];

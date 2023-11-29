@@ -6,32 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
-    <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        #film-details {
-            text-align: left;
-        }
-
-        #film-details img {
-            max-width: 100%;
-            max-height: 100vh;
-            display: block;
-            margin: 0 auto;
-        }
-
-        #film-info {
-            padding: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="info.css">
 </head>
 
 <body>
@@ -45,6 +20,9 @@
                 <p>Genres: ${genres}</p>
                 <p>Popularity: ${popularity}</p>
             </div>
+        </div>
+        <div id="video-result">
+             
         </div>
     </div>
     <script src="info.js"></script>

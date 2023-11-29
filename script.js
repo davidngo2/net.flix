@@ -3,7 +3,7 @@ const options = {
     headers: {
         accept: "application/json",
         Authorization:
-            "Bearer ",
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTAwZmRmNjdkN2ZiMDQzNTg1NjZmMWQ4N2M1YTYwZCIsInN1YiI6IjY1NDIxM2QzNmJlYWVhMDEwYjMwZDIzZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.E-T3vW7P93giUp0OANXrZ0uXa7mfRkcsnJP25d0m8jE",
     },
 };
 
@@ -223,7 +223,7 @@ function fetchTrendingTVShows() {
                     const filmCard = event.target.closest(".film-card");
                     if (filmCard) {
                         const filmId = filmCard.dataset.filmId;
-                        const infoPageUrl = `infoserie.html?id=${filmId}`;
+                        const infoPageUrl = `info-serie.html?id=${filmId}`;
                         window.location.href = infoPageUrl;
                     }
                 });

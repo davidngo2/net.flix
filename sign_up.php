@@ -13,7 +13,7 @@
     </div>
     <div class="text-center text-black">
         <img src="red-check-mark-circular-tick-16217.png" alt="Checkmark" class="w-10 mx-auto mb-2">
-        <p class="text-xs">STEP 1 OF 3</p>
+        <p class="text-xs">STEP <strong>1</strong> OF <strong>3</strong></p>
         <p class="text-4xl font-semibold mb-4">Choose your plan.</p>
     </div>
     <div class="max-w-xs mx-auto text-black">

@@ -1,0 +1,15 @@
+th {
+    width: 54%;
+    text-align: left;
+    font-weight: 400;
+    padding: 12px 16px;
+}
+td {
+    text-align: center;
+}
+.tr {
+    border-bottom: 1px solid #ddd;
+}
+.highlight {
+    color: red;
+}

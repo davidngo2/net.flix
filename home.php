@@ -6,74 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
-    <style>
-.film-slide {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-        }
-
-        .film-item {
-            flex: 0 0 auto;
-            scroll-snap-align: start;
-            width: 25%;
-        }
-
-        .relative {
-            position: relative;
-        }
-
-        .focus\:outline-none {
-            outline: none;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            margin-top: 2rem;
-            width: 8rem;
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            border-radius: 0.25rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            color: #ecf0f1;
-        }
-
-        .dropdown-menu a:hover {
-            background-color: #34495e;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background-color: #000;
-            color: #fff;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-        }
-
-        nav a {
-            margin-right: 1rem;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .logo {
-            margin-right: 800px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-gray-900 text-white">
