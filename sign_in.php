@@ -6,34 +6,33 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
 </head>
-        <?php
-        session_start();
-        include_once('conn.php');
+<?php
+    session_start();
+    include_once('conn.php');
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = $_POST['gebruikernaam'];
-            $password = $_POST['wachtwoord'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $gebruikernaam = $_POST['gebruikernaam'];
+    $password = $_POST['wachtwoord'];
 
-            $sql = "SELECT * FROM user WHERE gebruikernaam=:username AND wachtwoord=:password";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':password', $password);
-            $stmt->execute();
+    $sql = "SELECT * FROM user WHERE gebruikernaam=:gebruikernaam";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':gebruikernaam', $gebruikernaam);
+    $stmt->execute();
 
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($row) {
-                $user_id = $row['id'];
-                $_SESSION['user_id'] = $user_id;
-                header('Location: welcome.php');
-                exit;
-            } else {
-                echo "Inloggen mislukt.";
-            }
-        }
+    if ($row && password_verify($password, $row['wachtwoord'])) {
+        $user_id = $row['id'];
+        $_SESSION['user_id'] = $user_id;
+        header('Location: welcome.php');
+        exit;
+    } else {
+        echo "Inloggen mislukt.";
+    }
+}
 
-        $conn = null;
-        ?>
+    $conn = null;
+?>
 <body class="bg-blend-darken text-white font-sans" style="background-image: url('netflix.jpg');">
     <div class="logo p-4">
         <img src="logo.png" alt="Netflix Logo" class="w-32">
@@ -43,7 +42,7 @@
         <h1 class="text-3xl font-semibold mb-6">Sign In</h1>
         <div class="mb-10">
             <form action="" method="post">
-            <input type="text" placeholder="Username" name="gebruikernaam" class="bg-gray-600 mb-3 w-full px-4 py-3 rounded bg-[#333] text-white placeholder-gray-500 text-base">
+            <input type="text" placeholder="Gebruikernaam" name="gebruikernaam" class="bg-gray-600 mb-3 w-full px-4 py-3 rounded bg-[#333] text-white placeholder-gray-500 text-base">
             <input type="password" placeholder="Password" name="wachtwoord" class="bg-gray-600 mb-10 w-full px-4 py-3 rounded bg-[#333] text-white placeholder-gray-500 text-base">
             <button type="submit" class="mb-2 w-full px-4 py-3 rounded bg-red-600 text-white text-base hover:bg-red-dark focus:outline-none focus:ring-2 focus:ring-red">Sign In</button>
             <div class="flex items-center space-x-2">

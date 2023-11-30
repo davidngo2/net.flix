@@ -58,7 +58,7 @@
             <p class="mb-4">HD (720p), Full HD (1080p), Ultra HD (4K) and HDR availability subject to your internet service and device capabilities. Not all content is available in all resolutions. See our Terms of Use for more details.</p>
             <p class="mb-10">Only people who live with you may use your account. Watch on 4 different devices at the same time with Premium, 2 with Standard and 1 with Basic.</p>
             <div class="max-w-xs mx-auto text-black">
-                <a href="sign_up3.php" class="bg-red-600 text-white px-48 py-3 mt-4 rounded text-2xl">Next</a>
+                <button onclick="redirectToSignUp()" class="bg-red-600 text-white px-48 py-3 mt-4 rounded text-2xl">Next</button>
             </div>
         </div>
     </div>

@@ -17,6 +17,8 @@ while ($data = $query->fetch()) {
     $name = $data['gebruikernaam'];
     $password = $data['wachtwoord'];
     $email = $data['email'];
+    $subscribsie = $data['subscribsie'];
+    $eind_date  = $data['eind_date'];
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,7 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirmPassword = $_POST['confirm_password'];
 
     if ($newPassword == $confirmPassword) {
-        $updateQuery = $conn->prepare("UPDATE user SET wachtwoord = '$confirmPassword' WHERE id = '$user_id'");
+        // Hash the password
+        $hashedPassword = password_hash($confirmPassword, PASSWORD_DEFAULT);
+
+        // Use prepared statement to update the password
+        $updateQuery = $conn->prepare("UPDATE user SET wachtwoord = :password WHERE id = :user_id");
+        $updateQuery->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+        $updateQuery->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
         if ($updateQuery->execute()) {
             echo '<script>alert("Password changed successfully!");</script>';
@@ -35,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>alert("Passwords do not match.");</script>';
     }
 }
+
 ?>
 <body class="bg-gray-900 text-white font-sans">
     <nav class="bg-black p-4">
@@ -52,8 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h3 class="text-lg font-semibold">Account Information</h3>
         <div class="mt-2">
             <p><span class="font-semibold">Email:</span> <?php echo $email ?></p>
-            <p><span class="font-semibold">Plan:</span> Premium</p>
-            <p><span class="font-semibold">Billing Date:</span> October 19, 2023</p>
+            <p><span class="font-semibold">Plan:</span> <?php echo $subscribsie ?></p>
+            <p><span class="font-semibold">Billing Date:</span> <?php echo $eind_date ?></p>
         </div>
     </div>
     <div class="container mx-auto p-4 mt-4">

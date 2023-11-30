@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Style for the slideshow container */
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Style for slides */
+        .mySlides {
+            display: none;
+        }
+
+        /* Style for the navigation dots */
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="slideshow-container" id="slides-container">
+        <!-- Slides will be dynamically added here -->
+    </div>
+    <div id="dots-container" style="text-align: center; margin-top: 20px;"></div>
+
+    <script>
+        // JavaScript for slideshow functionality
+        let currentSlide = 0;
+        showSlides();
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("mySlides");
+            const dots = document.getElementsByClassName("dot");
+
+            if (slides.length === 0) {
+                // If there are no slides yet, wait and try again
+                setTimeout(showSlides, 100);
+                return;
+            }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            currentSlide++;
+
+            if (currentSlide > slides.length) {
+                currentSlide = 1;
+            }
+
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            slides[currentSlide - 1].style.display = "block";
+            dots[currentSlide - 1].className += " active";
+        }
+
+
+        function changeSlide(n) {
+            showSlides(currentSlide + n);
+        }
+
+        function fetchPopularMovieDetails() {
+            const options = {
+                method: "GET",
+                headers: {
+                    accept: "application/json",
+                    Authorization:
+                        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTAwZmRmNjdkN2ZiMDQzNTg1NjZmMWQ4N2M1YTYwZCIsInN1YiI6IjY1NDIxM2QzNmJlYWVhMDEwYjMwZDIzZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.E-T3vW7P93giUp0OANXrZ0uXa7mfRkcsnJP25d0m8jE",
+                },
+            };
+
+            fetch(
+                "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+                options
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    const slidesContainer = document.getElementById("slides-container");
+                    const dotsContainer = document.getElementById("dots-container");
+
+                    // Clear existing slides and dots
+                    slidesContainer.innerHTML = "";
+                    dotsContainer.innerHTML = "";
+
+                    // Limit to 8 films
+                    const limitedResults = data.results.slice(0, 8);
+
+                    // Iterate through movie results and create slides dynamically
+                    limitedResults.forEach((movie, index) => {
+                        const slide = document.createElement("div");
+                        slide.classList.add("mySlides");
+
+                        const movieDetails = `
+                    <h2>${movie.title}</h2>
+                    <p>${movie.overview}</p>
+                    <p>Release Date: ${movie.release_date}</p>
+                    <p>Popularity: ${movie.popularity}</p>
+                    <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
+                `;
+
+                        slide.innerHTML = movieDetails;
+
+                        slidesContainer.appendChild(slide);
+
+                        // Create a dot for each slide
+                        const dot = document.createElement("span");
+                        dot.classList.add("dot");
+                        dot.setAttribute("onclick", `currentSlide(${index + 1})`);
+                        dotsContainer.appendChild(dot);
+                    });
+
+                    // Update the slides and dots after creating them
+                    showSlides(currentSlide);
+                })
+                .catch((err) => console.error(err));
+        }
+
+        // Initial fetch and show
+        fetchPopularMovieDetails();
+
+        // Start automatic slideshow
+        setInterval(() => {
+            changeSlide(1);
+        }, 3000);
+
+    </script>
+
+</body>
+
+</html>

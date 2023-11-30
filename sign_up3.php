@@ -1,5 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+// Include your database connection file
+require_once 'conn.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $email = $_POST["email"];
+    $password = password_hash($_POST["wachtwoord"], PASSWORD_DEFAULT); // Hash the password for security
+    $gebruikernaam = $_POST["gebruikernaam"];
+
+
+    $selectedSubscription = $_GET['subscription'];
+    $subscriptionType = "";
+    switch ($selectedSubscription) {
+        case 1:
+            $subscriptionType = "Basic";
+            break;
+        case 2:
+            $subscriptionType = "Standard";
+            break;
+        case 3:
+            $subscriptionType = "Premium";
+            break;
+        default:
+            // Handle unexpected values if necessary
+            break;
+    }
+
+
+    // Validate and process the data
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // Email is valid
+
+        try {
+            // Set the current date and the date after today
+            $startDate = date("Y-m-d");
+            $endDate = date("Y-m-d", strtotime("+1 day"));
+
+            // Prepare and execute the SQL statement
+            $stmt = $conn->prepare("INSERT INTO user (email, gebruikernaam, wachtwoord, start_date, eind_date, subscribsie) VALUES (:email, :gebruikernaam, :password, :startDate, :endDate, :subscriptionType)");
+
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':gebruikernaam', $gebruikernaam);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':startDate', $startDate);
+            $stmt->bindParam(':endDate', $endDate);
+            $stmt->bindParam(':subscriptionType', $subscriptionType);
+            $stmt->execute();
+            header("Location: next_step.php");
+            exit();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+}
+?>
+
+
+
 
 <head>
     <meta charset="UTF-8">
@@ -21,10 +80,11 @@
         <h1 class="text-3xl font-bold mb-4">Create a password to start your membership</h1>
         <h1 class="mb-4">Just a few more steps and you're finished!
             We hate paperwork, too.</h1>
-        <div class="mb-10">
+        <div class="mb-10 text-black">
             <form action="" method="post">
-                <input type="Email" placeholder="Email" name="email" class="border border-black mb-3 w-full px-4 py-3 rounded text-white placeholder-gray-500">
-                <input type="password" placeholder="Password" name="wachtwoord" class="border border-black mb-4 w-full px-4 py-3 rounded text-white placeholder-gray-500">
+                <input type="Email" placeholder="Email" name="email" class="border border-black mb-3 w-full px-4 py-3 rounded placeholder-gray-500">
+                <input type="text" placeholder="gebruikernaam" name="gebruikernaam" class="border border-black mb-3 w-full px-4 py-3 rounded placeholder-gray-500">
+                <input type="password" placeholder="Password" name="wachtwoord" class="border border-black mb-4 w-full px-4 py-3 rounded placeholder-gray-500">
                 <div class="flex items-center space-x-2 mb-4">
                     <input type="checkbox" class="w-5 h-5 rounded bg-gray-500">
                     <label class="text-base">Yes, please email me Netflix special offers.</label>
